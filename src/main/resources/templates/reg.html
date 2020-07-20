@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Sweater. Регистрация</title>
+</head>
+<body>
+<div th:if="${param.error}">
+    Invalid username and password.
+</div>
+<div th:if="${param.logout}">
+    You have been logged out.
+</div>
+<p>Регистрация нового пользователя</p>
+<form th:action="@{/reg}" method="post">
+    <div><label> Имя пользователя: <input type="text" name="username" placeholder="user name"/> </label></div>
+    <div><label> Пароль: <input type="password" name="password" placeholder="password"/> </label></div>
+    <div><input type="submit" value="Регистрация"/></div>
+</form>
+</body>
+</html>
