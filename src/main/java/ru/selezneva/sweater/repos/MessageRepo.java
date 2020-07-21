@@ -1,7 +1,7 @@
 package ru.selezneva.sweater.repos;
 
 import org.springframework.data.repository.CrudRepository;
-import ru.selezneva.sweater.domain.Message;
+import ru.selezneva.sweater.entity.Message;
 
 import java.util.List;
 

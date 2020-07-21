@@ -1,13 +1,11 @@
-package ru.selezneva.sweater.domain;
+package ru.selezneva.sweater.entity;
 
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.Instant;
 
 @Entity
 @Getter
@@ -24,7 +22,7 @@ public class Message {
 
     private Timestamp time;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
 }

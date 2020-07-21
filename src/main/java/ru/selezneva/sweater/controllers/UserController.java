@@ -1,12 +1,11 @@
 package ru.selezneva.sweater.controllers;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import ru.selezneva.sweater.domain.User;
+import ru.selezneva.sweater.entity.User;
 import ru.selezneva.sweater.repos.UserRepo;
 import ru.selezneva.sweater.security.UserRole;
 

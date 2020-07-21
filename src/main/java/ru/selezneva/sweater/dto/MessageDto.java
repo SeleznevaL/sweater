@@ -1,12 +1,16 @@
 package ru.selezneva.sweater.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import ru.selezneva.sweater.domain.Message;
+import lombok.*;
+import lombok.experimental.Accessors;
+import ru.selezneva.sweater.entity.Message;
 
-@Getter
-@Setter
+@Data
+@Accessors(chain = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class MessageDto {
+    private Integer id;
+
     private String text;
 
     private String tag;
@@ -14,11 +18,4 @@ public class MessageDto {
     private String time;
 
     private String userName;
-
-    public MessageDto(Message message) {
-        this.text = message.getText();
-        this.tag = message.getTag();
-        this.time = message.getTime().toString();
-        this.userName = message.getUser().getUserName();
-    }
 }

@@ -1,4 +1,4 @@
-package ru.selezneva.sweater.domain;
+package ru.selezneva.sweater.entity;
 
 import lombok.Getter;
 import lombok.Setter;
