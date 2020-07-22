@@ -10,6 +10,7 @@ import java.util.Set;
 @Data
 @Accessors(chain = true)
 @AllArgsConstructor
+@NoArgsConstructor
 public class UserDto {
     private Long id;
     private String userName;

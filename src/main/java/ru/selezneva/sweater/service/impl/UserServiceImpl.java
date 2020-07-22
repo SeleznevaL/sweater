@@ -1,6 +1,7 @@
 package ru.selezneva.sweater.service.impl;
 
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import ru.selezneva.sweater.dto.UserDto;
@@ -17,10 +18,12 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
     private final UserRepo userRepo;
     private final Converter<User, UserDto> userUserDtoConverter;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserServiceImpl(UserRepo userRepo, Converter<User, UserDto> userUserDtoConverter) {
+    public UserServiceImpl(UserRepo userRepo, Converter<User, UserDto> userUserDtoConverter, PasswordEncoder passwordEncoder) {
         this.userRepo = userRepo;
         this.userUserDtoConverter = userUserDtoConverter;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @PostConstruct
@@ -29,7 +32,7 @@ public class UserServiceImpl implements UserService {
             userRepo.saveAndFlush(
                     new User().setRoles(Collections.singleton(UserRole.ADMIN))
                             .setUserName("admin").setActive(true)
-                            .setPassword("admin")
+                            .setPassword(passwordEncoder.encode("admin"))
             );
         }
     }
@@ -43,7 +46,10 @@ public class UserServiceImpl implements UserService {
                 roles.add(userRole);
             }
         }
-        User user = new User().setUserName(userDto.getUserName()).setActive(true).setPassword(userDto.getPassword()).setRoles(roles);
+        User user = new User().setUserName(userDto.getUserName())
+                .setActive(true)
+                .setPassword(passwordEncoder.encode(userDto.getPassword()))
+                .setRoles(roles);
         userRepo.save(user);
     }
 

@@ -5,17 +5,21 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import ru.selezneva.sweater.dto.UserDto;
 import ru.selezneva.sweater.entity.User;
 import ru.selezneva.sweater.repos.UserRepo;
 import ru.selezneva.sweater.security.UserRole;
+import ru.selezneva.sweater.service.UserService;
 
 import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 
 @Controller
 @RequiredArgsConstructor
 public class UserController {
 
-    final private UserRepo userRepo;
+    final private UserService userService;
 
     @GetMapping
     public String greeting() {
@@ -29,13 +33,10 @@ public class UserController {
 
     @PostMapping("/reg")
     public String reg(@RequestParam String username, @RequestParam String password) {
-        User user = new User().setUserName(username).setActive(true).setPassword(password).setRoles(Collections.singleton(UserRole.USER));
-        userRepo.save(user);
+        Map<UserRole, Boolean> roles = new HashMap<>();
+        roles.put(UserRole.USER, true);
+        UserDto user = new UserDto().setUserName(username).setActive(true).setPassword(password).setRoles(roles);
+        userService.save(user);
         return "redirect:/login";
-    }
-
-    @GetMapping("/login")
-    public String loginForm() {
-        return "login";
     }
 }
