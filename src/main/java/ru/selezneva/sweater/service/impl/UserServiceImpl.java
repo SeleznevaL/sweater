@@ -60,6 +60,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public List<UserDto> findAll() {
+        userRepo.findAll();
         return userRepo.findAll().stream().map(userUserDtoConverter::convert).collect(Collectors.toList());
     }
 
