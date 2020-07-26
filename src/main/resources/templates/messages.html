@@ -8,7 +8,7 @@
 </head>
 <body>
 <p><b>Список сообщений</b></p>
-<form method="post" action="filter">
+<form method="post" action="messages">
     <input type="text" th:if="${filter} != null" th:placeholder="${filter}" name="filter">
     <input type="text" th:if="${filter} == null" name="filter" placeholder="tag">
     <button type="submit">Найти</button>

@@ -74,10 +74,6 @@ public class UserServiceImplTest {
 
     }
 
-    @After
-    public void tearDown() throws Exception {
-    }
-
     @Test
     public void save() {
         userDto.setPassword("user");

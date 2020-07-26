@@ -55,7 +55,7 @@ public class MessageController {
         return "main";
     }
 
-    @PostMapping("/filter")
+    @PostMapping("/messages")
     public String filter(
             @RequestParam String filter,
             Model model,
@@ -79,7 +79,7 @@ public class MessageController {
         return "messages";
     }
 
-    @GetMapping("/filter")
+    @GetMapping("/messages")
     public String update(
             Model model,
             @CookieValue(value = "filter", required = false) Cookie filterCookie,
@@ -95,14 +95,6 @@ public class MessageController {
             Cookie cookie = new Cookie("filter", "");
             response.addCookie(cookie);
         }
-        all.sort((o1, o2) -> o2.getTime().compareTo(o1.getTime()));
-        model.addAttribute("messages", all);
-        return "messages";
-    }
-
-    @GetMapping("/messages")
-    public String messages(Model model) {
-        List<MessageDto> all = messageService.findAll();
         all.sort((o1, o2) -> o2.getTime().compareTo(o1.getTime()));
         model.addAttribute("messages", all);
         return "messages";
