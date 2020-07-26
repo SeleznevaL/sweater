@@ -1,0 +1,23 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sweater</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <meta http-equiv="refresh" content="10" />
+</head>
+<body>
+<p><b>Список сообщений</b></p>
+<form method="post" action="messages">
+    <input type="text" th:if="${filter} != null" th:placeholder="${filter}" name="filter">
+    <input type="text" th:if="${filter} == null" name="filter" placeholder="tag">
+    <button type="submit">Найти</button>
+</form>
+<div th:each="message : ${messages}">
+    <i th:text="${message.time}"></i>
+    <i><b th:text="${message.userName}"></b></i>
+    <span th:text="${message.text}">text</span>
+    <i th:text="${message.tag}">tag</i>
+</div>
+</body>
+</html>

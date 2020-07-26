@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Sweater</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+</head>
+<body>
+<p th:text="'Привет, ' + ${username} + '!'"></p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти"/>
+</form>
+<p><a href="/main">На главную</a></p>
+<table>
+    <tr>
+        <th>Пользователь</th>
+        <th>Роли</th>
+        <th></th>
+    </tr>
+    <tr th:each="user : ${users}">
+
+        <td th:text="${user.userName}"></td>
+        <form action="/edit" method="post">
+        <td th:each="role : ${user.roles}">
+            <input th:if="${role.value}" type="checkbox" th:id="${role}" th:name="${role.key}" checked/>
+            <input th:unless="${role.value}" type="checkbox" th:id="${role}" th:name="${role.key}" unchecked/>
+            <label th:for="${role}" th:text="${role.key}"></label>
+        </td>
+        <td>
+            <input type="hidden" name="id" th:value="${user.id}">
+            <button type="submit">Редактировать</button>
+        </td>
+        </form>
+    </tr>
+</table>
+</body>
+</html>
